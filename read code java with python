@@ -1,0 +1,36 @@
+
+from tkinter import*
+from tkinter import filedialog
+
+javaFull = []
+
+def buscar():
+    global archivo_tk
+    root.filename=filedialog.askopenfilename(title="buscar archivo",filetypes=(("archivos txt","*.txt"),)) #("todos los archivos, "*"")
+    java = open(f"{root.filename}") # open file
+    for x in java: # bucle for create a new list whit the values of the file 
+        javaFull.append(x)
+    java.close() # close file
+    mensaje=javaFull
+    imprimir(mensaje)
+def imprimir(mensaje):
+    listBox.insert(END,mensaje)
+    print(javaFull)
+
+mensaje = ""
+root = Tk()
+root.title("buscador")
+
+btn = Button(root,text="buscar",command=buscar).pack()
+# mensajeTxT = Text(root,width=30,height=10)
+# mensajeTxT.pack()
+
+listBox = Listbox(root)
+listBox.pack()
+barra = Scrollbar(root,command=listBox.yview)
+barra.pack()
+# place(relheight=0.2)
+listBox.config(yscrollcommand=barra)
+
+
+root.mainloop()
